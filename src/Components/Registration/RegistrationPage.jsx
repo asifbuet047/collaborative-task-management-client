@@ -30,7 +30,6 @@ function RegistrationPage() {
             return instance.post('/token', data);
         },
         onSuccess: (data) => {
-            console.log(data.data.ACCESS_TOKEN)
             localStorage.setItem('access-token', data.data.ACCESS_TOKEN);
         },
         onError: (error) => {

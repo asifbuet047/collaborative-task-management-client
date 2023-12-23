@@ -5,6 +5,7 @@ import RegistrationPage from "../Components/Registration/RegistrationPage";
 import PageNotFound from '../Components/PageNotFound/PageNotFound'
 import HomePage from "../Components/Home/HomePage";
 import Dashboard from "../Components/Dashboard/Dashboard";
+import AllTasks from "../Components/Dashboard/AllTasks/AllTasks";
 
 export const getRoutes = createBrowserRouter([
     {
@@ -43,6 +44,7 @@ export const getRoutes = createBrowserRouter([
             },
             {
                 path: 'alltasks',
+                element: <AllTasks />
             },
             {
                 path: 'profile',
