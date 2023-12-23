@@ -27,7 +27,7 @@ function RegistrationPage() {
     const tokenMutation = useMutation({
         mutationKey: ['token'],
         mutationFn: (data) => {
-            return instance.post('/api/v1/token', data);
+            return instance.post('/token', data);
         },
         onSuccess: (data) => {
             localStorage.setItem('access-token', data.data.ACCESS_TOKEN);
@@ -109,7 +109,8 @@ function RegistrationPage() {
             const email = getValues('email');
             const name = getValues('name');
             const photolink = getValues('photolink');
-            const user = { name, role: 'student', photo_url: photolink, email };
+            const type = getValues('type');
+            const user = { name, photolink, email, type };
             return instance.post('/user', user);
         },
         onSuccess: (data) => {
@@ -144,8 +145,6 @@ function RegistrationPage() {
     const handleRegistrationEvent = (event) => {
         const password = getValues('password');
         const email = getValues('email');
-        const name = getValues('name');
-        const photolink = getValues('photolink');
         const user = { email, password };
         newUserRegistrationMutation.mutate(user);
     };
@@ -192,6 +191,15 @@ function RegistrationPage() {
                             <input type="text" placeholder="Your photo URL" className="input input-bordered" {...register('photolink', { pattern: /^(https?|ftp):\/\/[^\s\/$.?#].[^\s]*$/ })} />
                             {
                                 errors.photolink?.type === 'pattern' && <span className='text-red-600'>Please input valid url</span>
+                            }
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Your business type</span>
+                            </label>
+                            <input type="text" placeholder="Your business type like banker, developers etc" className="input input-bordered" {...register('type', { required: true })} />
+                            {
+                                errors.type?.type === 'required' && <span className='text-red-600'>Required</span>
                             }
                         </div>
 
