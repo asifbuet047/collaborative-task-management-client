@@ -21,7 +21,7 @@ function SignInPage() {
   const getTokenMutation = useMutation({
     mutationKey: ['gettoken'],
     mutationFn: (data) => {
-      return instance.post('/api/v1/token', data);
+      return instance.post('/token', data);
     },
     onSuccess: (data) => {
       localStorage.setItem('access-token', data.data.ACCESS_TOKEN);

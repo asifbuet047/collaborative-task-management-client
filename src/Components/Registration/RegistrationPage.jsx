@@ -30,6 +30,7 @@ function RegistrationPage() {
             return instance.post('/token', data);
         },
         onSuccess: (data) => {
+            console.log(data.data.ACCESS_TOKEN)
             localStorage.setItem('access-token', data.data.ACCESS_TOKEN);
         },
         onError: (error) => {
@@ -49,11 +50,12 @@ function RegistrationPage() {
             const name = data.user.displayName;
             const email = data.user.email;
             const uid = data.user.uid;
-            const photo_url = data.user.photoURL;
+            const photolink = data.user.photoURL;
+            const type = getValues('type');
             const fortoken = { email, uid };
-            const user = { name, role: 'student', photo_url, email };
+            const user = { name, type, photolink, email };
             tokenMutation.mutate(fortoken);
-            addNewGoogleUserMutation.mutate(user);
+            addNewGoogleUserIntoDbMutation.mutate(user);
 
         },
         onError: (error) => {
@@ -122,13 +124,13 @@ function RegistrationPage() {
         }
     });
 
-    const addNewGoogleUserMutation = useMutation({
+    const addNewGoogleUserIntoDbMutation = useMutation({
         mutationKey: ['addnewgoogleuser'],
         mutationFn: (data) => {
             return instance.post('/user', data);
         },
         onSuccess: (data) => {
-            navigate('/dashboard/profile');
+            navigate('/dashboard');
             toast.success(`New Google user registration successful`, {
                 autoClose: 2000,
                 position: 'bottom-right'

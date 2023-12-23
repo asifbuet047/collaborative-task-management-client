@@ -34,6 +34,19 @@ export const getRoutes = createBrowserRouter([
         path: '/dashboard',
         element: <Dashboard />,
         errorElement: <PageNotFound></PageNotFound>,
-
+        children: [
+            {
+                path: 'addtask',
+            },
+            {
+                path: 'edittask',
+            },
+            {
+                path: 'alltasks',
+            },
+            {
+                path: 'profile',
+            }
+        ]
     }
 ]);
