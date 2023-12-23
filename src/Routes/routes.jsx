@@ -4,6 +4,7 @@ import SignInPage from "../Components/Signin/SignInPage";
 import RegistrationPage from "../Components/Registration/RegistrationPage";
 import PageNotFound from '../Components/PageNotFound/PageNotFound'
 import HomePage from "../Components/Home/HomePage";
+import Dashboard from "../Components/Dashboard/Dashboard";
 
 export const getRoutes = createBrowserRouter([
     {
@@ -31,6 +32,7 @@ export const getRoutes = createBrowserRouter([
     },
     {
         path: '/dashboard',
+        element: <Dashboard />,
         errorElement: <PageNotFound></PageNotFound>,
 
     }
